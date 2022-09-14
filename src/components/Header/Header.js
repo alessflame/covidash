@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import dash from "../../assets/images/Das.png";
+import {Link} from "react-router-dom"
 
 const pages = [{name:'Globale', path:"/" }, {name:'Italia', path:"/italy"}, {name:'USA', path:"/usa"}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -90,11 +91,11 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <a key={page.name} href={page.path} style={{textDecoration:"none"}}>
+                <Link key={page.name} to={page.path} style={{textDecoration:"none"}}>
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography color={"blue"} textAlign="center">{page.name}</Typography>
                 </MenuItem>
-                </a>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -117,18 +118,18 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            DASH
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <a key={page.name} href={page.path} style={{textDecoration:"none"}}>
+              <Link key={page.name} to={page.path} style={{textDecoration:"none"}}>
               <Button
                
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page.name}
-              </Button></a>
+              </Button></Link>
             ))}
           </Box>
 

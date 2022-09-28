@@ -43,7 +43,7 @@ function GlobalPage() {
   console.log(last30Days);
   return (
     <div>
-      {last30Days ?<MainSection globalData={globalData} last30days={last30Days} /> : ""}
+      {last30Days ?<MainSection globalData={globalData} last30days={last30Days} /> :""}
       
 
       <Container sx={{ display: "flex", justifyContent: "center" , m:0, p:0 }}>

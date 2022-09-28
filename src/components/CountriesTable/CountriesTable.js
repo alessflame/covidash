@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Avatar, Typography } from '@mui/material';
+import {Link} from "react-router-dom"
 import style from "./CountriesTable.module.css"
 import { setNumber } from '../../helper/utils/setNumber';
 
@@ -55,8 +56,10 @@ export default function CountriesTable({rows}) {
         <TableBody>
           { rows.length > 0 ?  rows.map((row) => (
             <StyledTableRow key={row.name}>
+             
               <StyledTableCell >
-                {row.name} {row.image ? <img style={{width:"20px"}} src={row.image} alt='country'/> : ""}
+              <Link style={{color:"black"}} to={`/country/${row.name}`}> {row.name} </Link> 
+              {row.image ? <img style={{width:"20px"}} src={row.image} alt='country'/> : ""}
               </StyledTableCell>
               <StyledTableCell align="center">{setNumber(row.cases)}</StyledTableCell>
               <StyledTableCell align="center">{setNumber(row.deaths)}</StyledTableCell>

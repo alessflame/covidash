@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import LineChart from "../LineChart/LineChart";
 import { setNumber } from "../../helper/utils/setNumber";
+import { CircularProgress, Container, LinearProgress } from "@mui/material";
 
 function MainChart({ data, selected }) {
   const options = {
@@ -57,7 +58,23 @@ function MainChart({ data, selected }) {
 
   return (
     <div>
-      {data.cases ? <LineChart data={getData()} options={options} /> : ""}
+      {data.cases ? (
+        <LineChart data={getData()} options={options} />
+      ) : (
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "80vh",
+            width: "100%",
+            
+          }}
+        >
+          {" "}
+          <CircularProgress />
+        </Container>
+      )}
     </div>
   );
 }

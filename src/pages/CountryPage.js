@@ -3,20 +3,25 @@ import { BarChart } from '../components/barChart/barChart';
 import React,{useState,useEffect,useCallback} from 'react'
 import MainSection from "../components/MainSection/MainSection"
 import RecoveredCard from "../components/RecoveredCard/RecoveredCard"
-import { getItalyData, getItalyLast30DaysData } from '../helper/getApi/italy/getItalyData';
+import { getCountryData, getCountryLast30DaysData  } from '../helper/getApi/country/getContryData';
 import {setNumber} from "../helper/utils/setNumber";
+import {useParams} from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+
 
 function ItalyPage() {
+  const {country}= useParams();
+
   const [globalData, setGlobalData] = useState([]);
   const [last30Days, setLast30Days]= useState({})
 
   const setLastMonth = useCallback(async () => {
-    setLast30Days(await getItalyLast30DaysData());
-  }, []);
+    if(country) setLast30Days(await getCountryLast30DaysData(country));
+  }, [country]);
 
   const setData = useCallback(async () => {
-    setGlobalData(await getItalyData());
-  }, []);
+    if(country) setGlobalData(await getCountryData(country));
+  }, [country]);
 
   // const setCountries = useCallback(async () => {
   //   setRows(await getCountriesData());
@@ -28,7 +33,7 @@ function ItalyPage() {
   }, [setData, setLastMonth]);
 
   const data= {
-    labels:["Casi|Ricoveri in Italia"],
+    labels:[`Casi|Ricoveri in ${country}`],
     datasets: [
       {
         label: "casi",
@@ -45,13 +50,12 @@ function ItalyPage() {
   };
 
 
-console.log(data);
   return (
     <div>
       <MainSection globalData={globalData} last30days={last30Days}/>
       <RecoveredCard recovered={setNumber(globalData.recovered)} todayRecovered={setNumber(globalData.todayRecovered)}/>
     
-    {globalData? <BarChart data={data}/> : ""}
+    {globalData? <BarChart data={data}/> : <CircularProgress/>}
     </div>
   )
 }

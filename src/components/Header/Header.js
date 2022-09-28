@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import dash from "../../assets/images/Das.png";
 import {Link} from "react-router-dom"
 
-const pages = [{name:'Globale', path:"/" }, {name:'Italia', path:"/italy"}, {name:'USA', path:"/usa"}];
+const pages = [{name:'Globale', path:"/" }, {name:'Italia', path:"/country/Italy"}, {name:'USA', path:"/usa"}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {

@@ -48,7 +48,7 @@ function GlobalPage() {
 
       <Container sx={{ display: "flex", justifyContent: "center" , m:0, p:0 }}>
         {/* <div style={{display:"flex", justifyContent:"center"}}> */}
-        <CountriesTable title="Nazioni" rows={rows} />
+        <CountriesTable title="Nazioni" rows={rows} routing={true} />
 
         {/* </div> */}
       </Container>

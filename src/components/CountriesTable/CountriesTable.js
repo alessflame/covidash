@@ -39,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 // }
 
 
-export default function CountriesTable({rows}) {
+export default function CountriesTable({rows, routing}) {
   return (
     <TableContainer className={style.table} component={Paper} sx={{position:"relative", width:"92%" , height:"400px", m:2}}>
       <Table className={style.table} sx={{width:"100%" }} aria-label="customized table">
@@ -58,7 +58,7 @@ export default function CountriesTable({rows}) {
             <StyledTableRow key={row.name}>
              
               <StyledTableCell >
-              <Link style={{color:"black"}} to={`/country/${row.name}`}> {row.name} </Link> 
+             {routing ?  <Link style={{color:"black",}} to={`/country/${row.name}`}> {row.name} </Link> :  row.name }
               {row.image ? <img style={{width:"20px"}} src={row.image} alt='country'/> : ""}
               </StyledTableCell>
               <StyledTableCell align="center">{setNumber(row.cases)}</StyledTableCell>

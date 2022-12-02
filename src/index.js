@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from "react-router-dom";
+import { router } from './helper/browserRouter/createBrowserRouter';
+import { RouterProvider } from 'react-router-dom/dist';
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-    <App />
-    </Router>
+  <RouterProvider router={router}>
+  </RouterProvider>
   </React.StrictMode>
 );
 

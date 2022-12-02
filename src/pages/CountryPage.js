@@ -7,43 +7,24 @@ import { getCountryData, getCountryLast30DaysData  } from '../helper/getApi/coun
 import {setNumber} from "../helper/utils/setNumber";
 import {useParams} from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { useLoaderData } from 'react-router-dom/dist';
 
 
-function ItalyPage() {
-  const {country}= useParams();
-
-  const [globalData, setGlobalData] = useState([]);
-  const [last30Days, setLast30Days]= useState({})
-
-  const setLastMonth = useCallback(async () => {
-    if(country) setLast30Days(await getCountryLast30DaysData(country));
-  }, [country]);
-
-  const setData = useCallback(async () => {
-    if(country) setGlobalData(await getCountryData(country));
-  }, [country]);
-
-  // const setCountries = useCallback(async () => {
-  //   setRows(await getCountriesData());
-  // }, []);
-
-  useEffect(() => {
-    setData();
-    setLastMonth();
-  }, [setData, setLastMonth]);
+function CountryPage() {
+  const loaderData=useLoaderData();
 
   const data= {
-    labels:[`Casi|Ricoveri in ${country}`],
+    labels:[`Casi|Ricoveri in ${loaderData.country}`],
     datasets: [
       {
         label: "casi",
-        data: [globalData.cases],
+        data: [loaderData.globalData.cases],
         backgroundColor: '#6EB5FF',
       },
     
       {
         label: "ricoverati",
-        data: [globalData.recovered],
+        data: [loaderData.globalData.recovered],
         backgroundColor: '#4E78CC',
       },
     ],
@@ -52,12 +33,12 @@ function ItalyPage() {
 
   return (
     <div>
-      <MainSection globalData={globalData} last30days={last30Days}/>
-      <RecoveredCard recovered={setNumber(globalData.recovered)} todayRecovered={setNumber(globalData.todayRecovered)}/>
+      <MainSection globalData={loaderData.globalData} last30days={loaderData.last30Days}/>
+      <RecoveredCard recovered={setNumber(loaderData.globalData.recovered)} todayRecovered={setNumber(loaderData.globalData.todayRecovered)}/>
     
-    {globalData? <BarChart data={data}/> : <CircularProgress/>}
+    {loaderData.globalData? <BarChart data={data}/> : <CircularProgress/>}
     </div>
   )
 }
 
-export default ItalyPage
+export default CountryPage;
